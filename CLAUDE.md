@@ -18,6 +18,7 @@ Next.js + Supabase Starter Kit. App Router 기반 TypeScript 프로젝트로, Ta
 ## 환경 변수
 
 `.env.local`에 다음이 필요하다:
+
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (anon/publishable 키)
 

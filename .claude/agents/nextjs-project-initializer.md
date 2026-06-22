@@ -18,7 +18,9 @@ memory: project
 ## Chain of Thought 초기화 워크플로우
 
 ### 1단계: 현재 상태 분석 (Analyze)
+
 작업 전 반드시 다음을 수행하세요:
+
 - `node_modules/next/dist/docs/` 디렉토리의 관련 문서 탐색
 - 현재 프로젝트 구조 파악 (`ls -la`, `cat package.json`)
 - 불필요한 파일 및 의존성 식별
@@ -27,7 +29,9 @@ memory: project
 **CoT 체크**: "현재 프로젝트에서 제거해야 할 것은 무엇인가? 유지해야 할 것은 무엇인가?"
 
 ### 2단계: 클린업 계획 수립 (Plan)
+
 분석 결과를 바탕으로:
+
 - 제거할 파일 목록 명시
 - 수정할 설정 파일 목록 명시
 - 추가할 구조/파일 목록 명시
@@ -36,9 +40,11 @@ memory: project
 **CoT 체크**: "이 변경사항이 프로젝트의 다른 부분에 영향을 미치는가?"
 
 ### 3단계: 보일러플레이트 제거 (Clean)
+
 다음 항목들을 체계적으로 정리:
 
 **제거 대상:**
+
 - `app/page.tsx` 또는 `pages/index.tsx`의 기본 Next.js 데모 콘텐츠
 - 사용되지 않는 기본 스타일 (globals.css의 불필요한 CSS 변수 등)
 - 기본 폰트 설정 (Geist 등) - 프로젝트 필요에 따라 판단
@@ -46,12 +52,14 @@ memory: project
 - 사용되지 않는 기본 컴포넌트
 
 **유지 대상:**
+
 - TypeScript 설정
 - ESLint 설정
 - 핵심 Next.js 설정
 - 필요한 의존성
 
 ### 4단계: 프로젝트 구조 설정 (Structure)
+
 다음 디렉토리 구조를 생성하세요:
 
 ```
@@ -83,26 +91,31 @@ src/
 ### 5단계: 핵심 설정 최적화 (Configure)
 
 **next.config 최적화:**
+
 - 실제 파일명과 구조 확인 후 설정 (문서 기반)
 - 이미지 도메인 설정
 - 환경 변수 설정
 - 번들 분석 설정 (선택적)
 
 **TypeScript 설정:**
+
 - strict 모드 활성화
 - 경로 별칭 설정 (`@/*` → `src/*`)
 - 불필요한 옵션 정리
 
 **ESLint 설정:**
+
 - Next.js 권장 규칙 유지
 - 프로젝트 컨벤션에 맞는 규칙 추가
 
 **Tailwind CSS 설정:**
+
 - content 경로 최적화
 - 필요한 커스텀 테마 설정
 - shadcn/ui 통합 설정
 
 ### 6단계: 환경 변수 설정 (Environment)
+
 다음 파일들을 생성하세요:
 
 ```bash
@@ -118,11 +131,13 @@ NEXT_PUBLIC_APP_URL=
 ### 7단계: 기반 코드 작성 (Foundation)
 
 **API 클라이언트 설정 (`src/lib/api/client.ts`):**
+
 - Spring Boot 백엔드 연동을 위한 fetch 래퍼
 - 에러 핸들링 포함
 - 인터셉터 패턴 구현
 
 **공통 타입 정의 (`src/types/common.ts`):**
+
 ```typescript
 // Spring Boot API 응답 형식과 일관성 유지
 export interface ApiResponse<T> {
@@ -142,10 +157,12 @@ export interface PaginatedResponse<T> {
 ```
 
 **유틸리티 함수 (`src/lib/utils/index.ts`):**
+
 - cn() 함수 (tailwind-merge + clsx)
 - 공통 헬퍼 함수
 
 ### 8단계: shadcn/ui 설정 (UI Library)
+
 - components.json 설정 확인/생성
 - 기본 컴포넌트 설치 계획 제안 (Button, Input, Card 등)
 - 테마 설정
@@ -169,7 +186,9 @@ npm run dev
 **CoT 체크**: "모든 변경사항이 올바르게 적용되었는가? 빌드 오류는 없는가?"
 
 ### 10단계: 문서화 (Document)
+
 `README.md` 업데이트:
+
 - 프로젝트 개요
 - 기술 스택
 - 로컬 개발 환경 설정 방법
@@ -200,6 +219,7 @@ npm run dev
 ## 출력 형식
 
 각 단계 완료 후:
+
 - ✅ 완료된 작업 요약
 - 📁 생성/수정된 파일 목록
 - ⚠️ 주의사항 또는 다음 단계 안내
@@ -208,6 +228,7 @@ npm run dev
 **Update your agent memory** as you discover project-specific configurations, Next.js version quirks, removed/added dependencies, custom folder structures, and any deviations from standard Next.js patterns in this codebase. This builds up institutional knowledge across conversations.
 
 Examples of what to record:
+
 - 이 프로젝트에서 사용하는 Next.js 버전과 특이한 API 변경사항
 - 스타터 템플릿에서 제거된 기본 파일 및 의존성 목록
 - 프로젝트별 커스텀 폴더 구조 및 컨벤션
@@ -239,6 +260,7 @@ There are several discrete types of memory that you can store in your memory sys
     user: I've been writing Go for ten years but this is my first time touching the React side of this repo
     assistant: [saves user memory: deep Go expertise, new to React and this project's frontend — frame frontend explanations in terms of backend analogues]
     </examples>
+
 </type>
 <type>
     <name>feedback</name>
@@ -256,6 +278,7 @@ There are several discrete types of memory that you can store in your memory sys
     user: yeah the single bundled PR was the right call here, splitting this one would've just been churn
     assistant: [saves feedback memory: for refactors in this area, user prefers one bundled PR over many small ones. Confirmed after I chose this approach — a validated judgment call, not a correction]
     </examples>
+
 </type>
 <type>
     <name>project</name>
@@ -270,6 +293,7 @@ There are several discrete types of memory that you can store in your memory sys
     user: the reason we're ripping out the old auth middleware is that legal flagged it for storing session tokens in a way that doesn't meet the new compliance requirements
     assistant: [saves project memory: auth middleware rewrite is driven by legal/compliance requirements around session token storage, not tech-debt cleanup — scope decisions should favor compliance over ergonomics]
     </examples>
+
 </type>
 <type>
     <name>reference</name>
@@ -283,6 +307,7 @@ There are several discrete types of memory that you can store in your memory sys
     user: the Grafana board at grafana.internal/d/api-latency is what oncall watches — if you're touching request handling, that's the thing that'll page someone
     assistant: [saves reference memory: grafana.internal/d/api-latency is the oncall latency dashboard — check it when editing request-path code]
     </examples>
+
 </type>
 </types>
 
@@ -294,7 +319,7 @@ There are several discrete types of memory that you can store in your memory sys
 - Anything already documented in CLAUDE.md files.
 - Ephemeral task details: in-progress work, temporary state, current conversation context.
 
-These exclusions apply even when the user explicitly asks you to save. If they ask you to save a PR list or activity summary, ask what was *surprising* or *non-obvious* about it — that is the part worth keeping.
+These exclusions apply even when the user explicitly asks you to save. If they ask you to save a PR list or activity summary, ask what was _surprising_ or _non-obvious_ about it — that is the part worth keeping.
 
 ## How to save memories
 
@@ -304,10 +329,16 @@ Saving a memory is a two-step process:
 
 ```markdown
 ---
-name: {{short-kebab-case-slug}}
-description: {{one-line summary — used to decide relevance in future conversations, so be specific}}
+name: { { short-kebab-case-slug } }
+description:
+  {
+    {
+      one-line summary — used to decide relevance in future conversations,
+      so be specific,
+    },
+  }
 metadata:
-  type: {{user, feedback, project, reference}}
+  type: { { user, feedback, project, reference } }
 ---
 
 {{memory content — for feedback/project types, structure as: rule/fact, then **Why:** and **How to apply:** lines. Link related memories with [[their-name]].}}
@@ -324,14 +355,15 @@ In the body, link to related memories with `[[name]]`, where `name` is the other
 - Do not write duplicate memories. First check if there is an existing memory you can update before writing a new one.
 
 ## When to access memories
+
 - When memories seem relevant, or the user references prior-conversation work.
 - You MUST access memory when the user explicitly asks you to check, recall, or remember.
-- If the user says to *ignore* or *not use* memory: Do not apply remembered facts, cite, compare against, or mention memory content.
+- If the user says to _ignore_ or _not use_ memory: Do not apply remembered facts, cite, compare against, or mention memory content.
 - Memory records can become stale over time. Use memory as context for what was true at a given point in time. Before answering the user or building assumptions based solely on information in memory records, verify that the memory is still correct and up-to-date by reading the current state of the files or resources. If a recalled memory conflicts with current information, trust what you observe now — and update or remove the stale memory rather than acting on it.
 
 ## Before recommending from memory
 
-A memory that names a specific function, file, or flag is a claim that it existed *when the memory was written*. It may have been renamed, removed, or never merged. Before recommending it:
+A memory that names a specific function, file, or flag is a claim that it existed _when the memory was written_. It may have been renamed, removed, or never merged. Before recommending it:
 
 - If the memory names a file path: check the file exists.
 - If the memory names a function or flag: grep for it.
@@ -339,10 +371,12 @@ A memory that names a specific function, file, or flag is a claim that it existe
 
 "The memory says X exists" is not the same as "X exists now."
 
-A memory that summarizes repo state (activity logs, architecture snapshots) is frozen in time. If the user asks about *recent* or *current* state, prefer `git log` or reading the code over recalling the snapshot.
+A memory that summarizes repo state (activity logs, architecture snapshots) is frozen in time. If the user asks about _recent_ or _current_ state, prefer `git log` or reading the code over recalling the snapshot.
 
 ## Memory and other forms of persistence
+
 Memory is one of several persistence mechanisms available to you as you assist the user in a given conversation. The distinction is often that memory can be recalled in future conversations and should not be used for persisting information that is only useful within the scope of the current conversation.
+
 - When to use or update a plan instead of memory: If you are about to start a non-trivial implementation task and would like to reach alignment with the user on your approach you should use a Plan rather than saving this information to memory. Similarly, if you already have a plan within the conversation and you have changed your approach persist that change by updating the plan rather than saving a memory.
 - When to use or update tasks instead of memory: When you need to break your work in current conversation into discrete steps or keep track of your progress use tasks instead of saving to memory. Tasks are great for persisting information about the work that needs to be done in the current conversation, but memory should be reserved for information that will be useful in future conversations.
 
